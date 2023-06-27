@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:id="@+id/scoreRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="1dp">
+
+            <TextView
+                android:id="@+id/appName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center_horizontal"
+                android:padding="0dp"
+                android:text="@string/app_name"
+                android:textColor="@color/primary"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/scoreView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_weight="1"
+                android:text="@string/score_text"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/gameView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_weight="1"
+                android:text="@string/game_state"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/topRowDice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/diceTopLeft"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cropToPadding="false"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/grey1"
+                android:contentDescription="@string/image_of_dice">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/diceTopMid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cropToPadding="false"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/grey2"
+                android:contentDescription="@string/image_of_dice">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/diceTopRight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cropToPadding="false"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/grey3"
+                android:contentDescription="@string/image_of_dice">
+
+            </ImageView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/bottomRowDice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/diceBottomLeft"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cropToPadding="false"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/grey4"
+                android:contentDescription="@string/image_of_dice">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/diceBottomMid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cropToPadding="false"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/grey5"
+                android:contentDescription="@string/image_of_dice">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/diceBottomRight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cropToPadding="false"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/grey6"
+                android:contentDescription="@string/image_of_dice">
+
+            </ImageView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/marginRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp" >
+
+            <Spinner
+                android:id="@+id/choiceSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cropToPadding="false"
+                android:entries="@array/spinner_choices"
+                android:padding="10dp"
+                android:spinnerDropDownItemStyle="@style/Widget.AppCompat.DropDownItem.Spinner"
+
+                tools:ignore="TouchTargetSizeCheck" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/buttonRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            >
+
+            <Button
+                android:id="@+id/throwButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cropToPadding="false"
+                android:layout_margin="2dp"
+                android:text="@string/throw_button"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/countButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cropToPadding="false"
+                android:layout_margin="2dp"
+                android:text="@string/count_button"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/gameRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Thirty</string>
+    <string name="throw_button">THROW</string>
+    <string name="count_button">COUNT</string>
+
+    <string-array name="spinner_choices">
+        <item name="choice_low">LOW</item>
+        <item name="choice_4">FOUR</item>
+        <item name="choice_5">FIVE</item>
+        <item name="choice_6">SIX</item>
+        <item name="choice_7">SEVEN</item>
+        <item name="choice_8">EIGHT</item>
+        <item name="choice_9">NINE</item>
+        <item name="choice_10">TEN</item>
+        <item name="choice_11">ELEVEN</item>
+        <item name="choice_12">TWELVE</item>
+    </string-array>
+
+    <string name="count_rules_text">Time to count!\nYou selected:</string>
+    <string name="add_button">ADD\nSELECTED</string>
+    <string name="next_button">NEXT\nROUND</string>
+    <string name="choice_text">chosenChoice</string>
+    <string name="score_text">-score-</string>
+    <string name="game_state">-gameState-</string>
+
+    <string name="finished_text">Game is done\nYour total score is %d</string>
+    <string name="image_of_dice">image of dice</string>
+</resources>
