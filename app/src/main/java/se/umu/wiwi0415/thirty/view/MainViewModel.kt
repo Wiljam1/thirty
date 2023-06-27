@@ -3,7 +3,6 @@ package se.umu.wiwi0415.thirty.view
 import android.widget.ImageView
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import se.umu.wiwi0415.thirty.model.Dice
 import se.umu.wiwi0415.thirty.model.GameState
 import se.umu.wiwi0415.thirty.model.Score
 import se.umu.wiwi0415.thirty.model.SetOfDice
@@ -26,7 +25,7 @@ class DiceViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         get() = savedStateHandle[SPINNER_ITEMS_KEY] ?: emptyList()
         set(value) = savedStateHandle.set(SPINNER_ITEMS_KEY, value)
 
-    var gameState: GameState
+    private var gameState: GameState
         get() = savedStateHandle[GAME_STATE_KEY] ?: GameState()
         set(value) = savedStateHandle.set(GAME_STATE_KEY, value)
 
@@ -51,7 +50,16 @@ class DiceViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         }
     }
 
-    fun selectDice(clickedDice: Dice) {
+    fun displayGameState(): String {
+        return gameState.displayGameState()
+    }
+
+    fun displayScoreRoll(): String {
+        return scoreModel.displayScoreRoll()
+    }
+
+    fun selectDice(diceId: Int) {
+        val clickedDice = diceModel.diceList[diceId]
         diceModel.toggleSelected(clickedDice)
         updateMainImages()
     }

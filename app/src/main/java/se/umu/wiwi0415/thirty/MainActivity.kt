@@ -24,26 +24,23 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            //TODO: Might not be needed
             vm.scoreModel = when {
                 Build.VERSION.SDK_INT >= 34 -> result.data?.getParcelableExtra(SCORE_MODEL, Score::class.java)!!
                 else -> (@Suppress("DEPRECATION") result.data?.getParcelableExtra(SCORE_MODEL) as? Score)!!
             }
-            //TODO: Do in viewmodel
-            binding.scoreView.text = vm.scoreModel.displayScoreRoll()
-            binding.countButton.isEnabled = false
-            binding.throwButton.isEnabled = true
 
-            vm.diceModel.unSelectAllDice()
-            vm.diceModel.disableDice()
+
+
             if(vm.nextRound() == 3) {
                 //Launch new activity, showing score
                 val intent = ScoreActivity.newIntent(this@MainActivity, vm.scoreModel.totalScore)
                 scoreLauncher.launch(intent)
             }
 
-            //TODO: VIEWMODEL
-            binding.gameView.text = vm.gameState.displayGameState()
+            refreshUI()
+            vm.diceModel.unSelectAllDice()
+            vm.diceModel.disableDice()
+            //binding.gameView.text = vm.displayGameState()
             vm.updateMainImages()
         }
     }
@@ -74,11 +71,7 @@ class MainActivity : AppCompatActivity() {
         vm.setMainImages(diceImageViews)
         vm.updateMainImages()
 
-        //TODO: Do in viewmodel
-        binding.countButton.isEnabled = false
-        binding.throwButton.isEnabled = true
-        binding.scoreView.text = vm.scoreModel.displayScoreRoll()
-        binding.gameView.text = vm.gameState.displayGameState()
+        refreshUI()
 
         //Keep initial spinner
         if(vm.initialSpinnerList.isEmpty()) {
@@ -100,38 +93,31 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Buttons
-        //TODO: Alla knappar kan fixas snyggare med VM
-        binding.diceTopLeft.setOnClickListener { view: View ->
-            val clickedDice = vm.diceModel.diceList[0]
-            vm.selectDice(clickedDice)
+        binding.diceTopLeft.setOnClickListener {
+            vm.selectDice(0)
         }
 
-        binding.diceTopMid.setOnClickListener { view: View ->
-            val clickedDice = vm.diceModel.diceList[1]
-            vm.selectDice(clickedDice)
+        binding.diceTopMid.setOnClickListener {
+            vm.selectDice(1)
         }
 
-        binding.diceTopRight.setOnClickListener { view: View ->
-            val clickedDice = vm.diceModel.diceList[2]
-            vm.selectDice(clickedDice)
+        binding.diceTopRight.setOnClickListener {
+            vm.selectDice(2)
         }
 
-        binding.diceBottomLeft.setOnClickListener { view: View ->
-            val clickedDice = vm.diceModel.diceList[3]
-            vm.selectDice(clickedDice)
+        binding.diceBottomLeft.setOnClickListener {
+            vm.selectDice(3)
         }
 
-        binding.diceBottomMid.setOnClickListener { view: View ->
-            val clickedDice = vm.diceModel.diceList[4]
-            vm.selectDice(clickedDice)
+        binding.diceBottomMid.setOnClickListener {
+            vm.selectDice(4)
         }
 
-        binding.diceBottomRight.setOnClickListener { view: View ->
-            val clickedDice = vm.diceModel.diceList[5]
-            vm.selectDice(clickedDice)
+        binding.diceBottomRight.setOnClickListener {
+            vm.selectDice(5)
         }
 
-        binding.throwButton.setOnClickListener { view: View ->
+        binding.throwButton.setOnClickListener {
             if(!binding.countButton.isEnabled)
                 binding.countButton.isEnabled = true
 
@@ -139,15 +125,14 @@ class MainActivity : AppCompatActivity() {
             if(vm.incrementThrows() == 3) {
                 binding.throwButton.isEnabled = false
             }
-            //TODO: Fixa till viewmodel
-            binding.gameView.text = vm.gameState.displayGameState()
+
+            binding.gameView.text = vm.displayGameState()
         }
 
         binding.countButton.setOnClickListener { view: View ->
-            //go to new activity to count points
             vm.diceModel.unSelectAllDice()
-            println("Trying to open countActivity..")
-            //TODO: Create a function in viewmodel that does this...
+
+            //Launch CountActivity
             val spinnerValue = binding.choiceSpinner.selectedItem.toString()
             removeSpinnerItem(spinnerValue)
             val intent = CountActivity.newIntent(
@@ -161,13 +146,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun refreshUI() {
+        binding.scoreView.text = vm.displayScoreRoll()
+        binding.gameView.text = vm.displayGameState()
+        binding.countButton.isEnabled = false
+        binding.throwButton.isEnabled = true
+    }
+
     private fun reset() {
         println("RESET CALLED!")
         vm.reset()
         resetSpinner()
 
-        binding.scoreView.text = vm.scoreModel.displayScoreRoll()
-        binding.gameView.text = vm.gameState.displayGameState()
+        binding.scoreView.text = vm.displayScoreRoll()
+        binding.gameView.text = vm.displayGameState()
         vm.updateMainImages()
     }
 
@@ -181,7 +173,6 @@ class MainActivity : AppCompatActivity() {
         vm.spinnerItems = emptyList()
     }
 
-    //TODO: ViewModel function?
     private fun removeSpinnerItem(itemToRemove: String) {
         val adapter = binding.choiceSpinner.adapter as ArrayAdapter<*>
         val items = mutableListOf<String>()
