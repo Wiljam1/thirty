@@ -33,9 +33,9 @@ data class SetOfDice(
     fun updateDrawables() {
         diceList.forEach { dice ->
             when {
-                !dice.isRolled -> setDrawColor(dice, Color.GREY)
-                !dice.isSelected -> setDrawColor(dice, Color.WHITE)
-                else -> setDrawColor(dice, Color.RED)
+                !dice.isRolled -> setDrawColor(dice, DiceColor.GREY)
+                !dice.isSelected -> setDrawColor(dice, DiceColor.WHITE)
+                else -> setDrawColor(dice, DiceColor.RED)
             }
         }
     }
@@ -78,9 +78,9 @@ data class SetOfDice(
         }
     }
 
-    private fun setDrawColor(dice: Dice, color: Color) {
+    private fun setDrawColor(dice: Dice, color: DiceColor) {
         dice.drawableResId = when (color) {
-            Color.RED -> {
+            DiceColor.RED -> {
                 when (dice.value) {
                     1 -> R.drawable.red1
                     2 -> R.drawable.red2
@@ -91,7 +91,7 @@ data class SetOfDice(
                     else -> throw IllegalArgumentException("Invalid dice value: ${dice.value}")
                 }
             }
-            Color.GREY -> {
+            DiceColor.GREY -> {
                 when (dice.value) {
                     1 -> R.drawable.grey1
                     2 -> R.drawable.grey2
@@ -102,7 +102,7 @@ data class SetOfDice(
                     else -> throw IllegalArgumentException("Invalid dice value: ${dice.value}")
                 }
             }
-            Color.WHITE -> {
+            DiceColor.WHITE -> {
                 when (dice.value) {
                     1 -> R.drawable.white1
                     2 -> R.drawable.white2
@@ -125,10 +125,6 @@ data class SetOfDice(
             Dice(4, R.drawable.grey5, 5, false, false),
             Dice(5, R.drawable.grey6, 6, false, false),
         )
-    }
-
-    override fun toString(): String {
-        return "SetOfDice(diceList=$diceList)"
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

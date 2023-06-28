@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Thirty"
         tools:targetApi="31">
         <activity
-            android:name=".controller.ScoreActivity"
+            android:name=".controller.ScoreboardActivity"
             android:exported="false" />
         <activity
             android:name=".controller.CountActivity"

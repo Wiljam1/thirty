@@ -75,7 +75,6 @@ class DiceViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
     fun incrementThrows(): Int {
         val updatedGameState = gameState.copy(throws = gameState.throws + 1)
         savedStateHandle[GAME_STATE_KEY] = updatedGameState
-        println("VM gamestate: " + updatedGameState.displayGameState())
         return updatedGameState.throws
     }
 
@@ -89,7 +88,6 @@ class DiceViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         gameState.reset()
         diceModel.reset()
          scoreModel.reset()
-
     }
 
 }
